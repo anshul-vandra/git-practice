@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useState } from 'react'
+import Container from './practice/Container'
+import One from './practice/One'
+import PropTest from './PropTest'
 
-function App() {
+const App: React.FunctionComponent = () => {
+
+  // useref
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // onchange
+  const onInputChange: React.ChangeEventHandler<HTMLInputElement> = e => {
+    console.log('e: ', e);
+  }
+
+  const [name, setname] = useState<boolean | any>(true)
+  console.log('setname: ', setname);
+
+  console.log('name: ', name);
+  console.log('name: ', name);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input ref={inputRef} onChange={(e) => onInputChange(e)} />
+      <PropTest fname={undefined} age={18} isDeleted={true} />
+      <Container>
+        <One name={'anshul'}
+          // count={12}
+          listOfUser={
+            [{ email: 'anshul@gmail.com', password: '123456' }]
+          }
+          status={true}
+          nameObj={{ fname: 'fname', lname: 'lname' }}
+          userStatus={'loading'} />
+      </Container>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
